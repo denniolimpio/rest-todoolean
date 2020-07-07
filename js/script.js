@@ -1,29 +1,50 @@
+// document ready start
 $(document).ready(function () {
+
+  // richiamo l'api con l'elenco delle cose da cosaDaFare
+
+  todoList ();
 
   // dichiaro le mie variabili:
   var aggiungi = $('#addText');
-  var elimina = $('#deleteText');
-  // richiamo l'api con l'elenco delle cose da cosaDaFare
-  todoList ();
 
 
-// Quando clicco sul bottone aggiungi  genero un evento:
-// -- > salvo il contenuto della input sul server     saveInput ()
-// -- > refresho la pagina e mostro il nuovo elemento a schermo
-    aggiungi.click( function (){
-    saveInput ()
-    todoList ();
+  // Quando clicco sulla barra spaziatrice  (..):
+  // -- > salvo il contenuto della input sul server     saveInput ()
+  // -- > refresho la pagina e mostro il nuovo elemento a schermo
+  $("#inputBar").keypress ( function () {
+
+
+    if (event.which === 13 || event.keyCode === 13) {
+
+      saveInput ()
+      todoList ();
+
+    }
+
   });
 
 
-// Quando clicco sul bottone delete ( X )  genero un evento:
-// -- > elimino l'elemento cliccato
-  $(document).on('click', elimina, function () {
-    deleteElementList ()
+  // Quando clicco sul bottone aggiungi  genero un evento:
+  // -- > salvo il contenuto della input sul server     saveInput ()
+  // -- > refresho la pagina e mostro il nuovo elemento a schermo
+  aggiungi.click( function (){
+    saveInput ()
+    todoList ();
+
+  });
+
+
+  // Quando clicco sul bottone delete ( X )  genero un evento:
+  // -- > elimino l'elemento cliccato
+  $(document).on('click', '.deleteText', function () {
+
+    var elementID  = $(this).parent().attr("data-id");
+
+    deleteElementList (elementID)
     // alert("click elimina");
 
   });
-
 
 
 });
@@ -33,10 +54,13 @@ $(document).ready(function () {
 
 
 
-// ------- funzioni -------
 
-// function
+
+// ==========         - --   FUNZIONI   -- -                ============
+
+// === #1 FUNZIONE todoList
 // con questa funzione richiamo la mia api porta :3021/todos
+// ottengo gli elementi della lista
 
 function todoList () {
 
@@ -73,13 +97,17 @@ function todoList () {
   })
 
 }
+// === FINE FUNZIONE todoList
 
-// saveInput
+
+
+
+// === #2 FUNZIONE // saveInput
 // Creo una funzione che mi permette di salvare il contenuto della input sul server
 
 function saveInput () {
 
- // leggo il contenuto della input
+  // leggo il contenuto della input
   var input = $("input").val();
 
   if ( input.length > 0 ) {
@@ -104,25 +132,30 @@ function saveInput () {
 
     alert( " attenzione, il campo di testo è vuoto");
   }
+
+  $("#inputBar").val("");
+
 }
 
+// === FINE FUNZIONE saveInput
 
 
-// -- function deleteElementList
 
-function deleteElementList () {
+// === #3 FUNZIONE  deleteElementList
+// -- > function deleteElementList mi permette di eliminare singolarmente gli elementi della lista
+// -- >  gli elementi vengono eliminati anche dal server
 
-
-  var elementID  = $(this).parent().attr("data-id");
+function deleteElementList (elementID) {
 
   $.ajax ( {
 
-    url: "http://157.230.17.132:3021/todos" + elementID, // aggiungo l'id corrispondente all'elemento della lsita
+    url: "http://157.230.17.132:3021/todos/" + elementID, // aggiungo l'id corrispondente all'elemento della lsita
     method: 'DELETE',
     success: function(dataResponse) {
 
+        // console.log(dataResponse)
 
-
+        todoList ()
     },
 
     error: function() {
@@ -134,10 +167,17 @@ function deleteElementList () {
 
 }
 
-//reset, refresho in contenuto della pagina ogni volta che aggiungo un nuovo elemento nella lista
+// === FINE FUNZIONE  deleteElementList
+
+
+
+// === #4 FUNZIONE  reset
+// -- > refresho in contenuto della pagina ogni volta che aggiungo un nuovo elemento nella lista
+
 function reset () {
+
   $("#todo-list").html("");
 
 }
 
-// salvo i valori della input nella Api cosi da vederlo anche al refresh della pagina
+// === FINE  FUNZIONE  reset
