@@ -1,11 +1,10 @@
 $(document).ready(function () {
+  todoList ();
 
 // richiamo l'api
 
-  todoList ();
 
   $("#addText").click( function (){
-
 
 
   var input = $("input").val();
@@ -19,9 +18,9 @@ $(document).ready(function () {
       data: {
         text: input
       },
+
       success: function(dataResponse) {
 
-        console.log(dataResponse)
 
       },
 
@@ -43,7 +42,6 @@ $(document).ready(function () {
 
 
 
-  // reset();
 
 });
 
@@ -60,6 +58,8 @@ $(document).ready(function () {
 // con questa funzione richiamo la mia api
 
 function todoList () {
+
+  $("#todo-list").html("");
 
 
   $.ajax( {
@@ -98,8 +98,6 @@ function todoList () {
 
 //reset
 function reset () {
-
-  $("#todo-list").html("");
 
 }
 
