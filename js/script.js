@@ -19,9 +19,9 @@ $(document).ready(function () {
 // Quando clicco sul bottone delete ( X )  genero un evento:
 // -- > elimino l'elemento cliccato
   $(document).on('click', elimina, function () {
+    deleteElementList ()
+    // alert("click elimina");
 
-    alert ( "hai cliccato elimina");
-    
   });
 
 
@@ -35,7 +35,7 @@ $(document).ready(function () {
 
 // ------- funzioni -------
 
-
+// function
 // con questa funzione richiamo la mia api porta :3021/todos
 
 function todoList () {
@@ -45,7 +45,7 @@ function todoList () {
   $.ajax( {
 
     url: "http://157.230.17.132:3021/todos",
-    method: "GET", // leggo
+    method: 'GET', // leggo
     success: function(dataResponse) {
 
       if( dataResponse.length > 0) {
@@ -74,7 +74,7 @@ function todoList () {
 
 }
 
-
+// saveInput
 // Creo una funzione che mi permette di salvare il contenuto della input sul server
 
 function saveInput () {
@@ -87,7 +87,7 @@ function saveInput () {
     $.ajax ( {
 
       url: "http://157.230.17.132:3021/todos",
-      method: "POST", // leggo
+      method: 'POST', // leggo
       data: {
         text: input
       },
@@ -106,6 +106,33 @@ function saveInput () {
   }
 }
 
+
+
+// -- function deleteElementList
+
+function deleteElementList () {
+
+
+  var elementID  = $(this).parent().attr("data-id");
+
+  $.ajax ( {
+
+    url: "http://157.230.17.132:3021/todos" + elementID, // aggiungo l'id corrispondente all'elemento della lsita
+    method: 'DELETE',
+    success: function(dataResponse) {
+
+
+
+    },
+
+    error: function() {
+
+      alert("ops, qualcosa è andato storto");
+    }
+
+  })
+
+}
 
 //reset, refresho in contenuto della pagina ogni volta che aggiungo un nuovo elemento nella lista
 function reset () {
