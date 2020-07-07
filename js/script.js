@@ -1,10 +1,11 @@
 $(document).ready(function () {
-  todoList ();
 
 // richiamo l'api
+todoList ();
 
 
   $("#addText").click( function (){
+
 
 
   var input = $("input").val();
@@ -40,6 +41,7 @@ $(document).ready(function () {
 
 
 
+  todoList ();
 
 
 
@@ -59,7 +61,7 @@ $(document).ready(function () {
 
 function todoList () {
 
-  $("#todo-list").html("");
+  reset();
 
 
   $.ajax( {
@@ -98,6 +100,7 @@ function todoList () {
 
 //reset
 function reset () {
+  $("#todo-list").html("");
 
 }
 
