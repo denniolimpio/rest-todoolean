@@ -1,0 +1,34 @@
+body {
+  font-size: 40px;
+  width: 80%;
+  margin: auto;
+}
+
+button {
+  border: none;
+  background: none;
+}
+.container i {
+  font-size: 30px;
+}
+
+ul li {
+  list-style-type: upper-roman;
+  border-bottom: .5px solid grey;
+
+}
+
+.container {
+  padding: 40px;
+  font-family: 'Yellowtail', cursive;
+  background-image: url(../img/paper.png);
+  box-shadow: -1px 6px 47px -1px rgba(0,0,0,0.73);
+   border-radius: 18px 18px 18px 18px;
+   border: 7px solid #633200;
+   transition: all 1s ease
+}
+
+
+.penna {
+  font-size: 17px;
+}

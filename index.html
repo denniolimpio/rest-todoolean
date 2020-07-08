@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.js"></script> <!-- handlebars -->
 
   <!-- css -->
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
   <link rel="stylesheet" href="css/style.css">
   </head>
@@ -19,20 +20,29 @@
 
     <div>
 
-      <input id="inputBar" placeholder="inserisci testo">
-      <button id="addText" name="button "> aggiungi</button>
+      <input id="inputBar" placeholder="Aggiungi nota">
+      <button id="addText" name="button ">
+          <i class="fas fa-pen-alt penna"></i>
+      </button>
 
     </div>
+
+<div class="container">
   <h1>lista cose da fare</h1>
 
   <ul id="todo-list">
   </ul>
 
+</div>
+
+
 
   <script id="list-template" type="text/x-handlebars-template">
 
     <li data-id ="{{id}}"> {{text}}
-      <button class="deleteText"> X </button>
+      <button class="deleteText">
+          <i class="fas fa-eraser"></i>
+       </button>
     </li>
 
   </script>
